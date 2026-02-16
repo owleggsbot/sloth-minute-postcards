@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sloth Minute Postcards</title>
+  <meta name="description" content="Sloth Minute Postcards — generate premium, printable, shareable reflection postcards in 60 seconds. Offline-first. No accounts." />
+  <meta property="og:title" content="Sloth Minute Postcards" />
+  <meta property="og:description" content="Premium, printable reflection postcards in 60 seconds. Offline-first. No accounts." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="theme-color" content="#070a0f" />
+
+  <link rel="icon" href="assets/sloth.svg" type="image/svg+xml" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="wrap">
+    <header class="top">
+      <div class="brand">
+        <img class="logo" src="assets/sloth.svg" alt="Sloth" />
+        <div class="brandText">
+          <h1>Sloth Minute Postcards</h1>
+          <p class="tag">60-second reflection postcards • printable • offline-first</p>
+        </div>
+      </div>
+      <div class="headerActions">
+        <button id="btnNew" class="btn" type="button">New postcard</button>
+        <button id="btnShuffle" class="btn ghost" type="button">Shuffle prompt</button>
+        <button id="btnShare" class="btn secondary" type="button">Export</button>
+      </div>
+    </header>
+
+    <section class="grid">
+      <section class="card">
+        <div class="cardHead">
+          <div>
+            <h2>Compose</h2>
+            <div class="small muted">Pick a prompt, write one paragraph, export a premium card. No accounts. No keys.</div>
+          </div>
+          <div class="pill">Collection: <span id="savedCount">0</span></div>
+        </div>
+
+        <div class="controls">
+          <label>
+            Prompt pack
+            <select id="pack"></select>
+          </label>
+          <label>
+            Style
+            <select id="style">
+              <option value="forest" selected>Forest Night</option>
+              <option value="cream">Cream Letterpress</option>
+              <option value="ocean">Ocean Calm</option>
+              <option value="mono">Mono Minimal</option>
+            </select>
+          </label>
+          <label>
+            Mood stamp
+            <select id="stamp">
+              <option value="none" selected>none</option>
+              <option value="slow">slow but steady</option>
+              <option value="tender">tender day</option>
+              <option value="brave">quietly brave</option>
+              <option value="rest">rest is productive</option>
+              <option value="softno">soft no</option>
+            </select>
+          </label>
+          <label>
+            Duration
+            <select id="timer">
+              <option value="0" selected>off</option>
+              <option value="60">60 seconds</option>
+              <option value="90">90 seconds</option>
+              <option value="120">2 minutes</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="promptBox">
+          <div class="promptLabel">Prompt</div>
+          <div id="prompt" class="prompt">—</div>
+        </div>
+
+        <div class="row split" style="margin-top:10px;">
+          <div class="pill">Time left: <span id="timeLeft">—</span></div>
+          <div class="row" style="gap:10px;">
+            <button id="btnStart" class="btn ghost" type="button">Start timer</button>
+            <button id="btnSave" class="btn ghost" type="button">Save</button>
+          </div>
+        </div>
+
+        <label style="margin-top:12px;">
+          Your paragraph
+          <textarea id="text" class="text" rows="7" placeholder="One honest paragraph. No pressure. Sloths are famously unbothered."></textarea>
+        </label>
+
+        <div class="row split" style="margin-top:12px;">
+          <div class="small muted">Export creates a PNG + a print view. Shareable state is encoded in the URL hash.</div>
+          <button id="btnCopyLink" class="btn secondary" type="button">Copy link</button>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="cardHead">
+          <div>
+            <h2>Preview</h2>
+            <div class="small muted">This is the actual exported composition.</div>
+          </div>
+        </div>
+
+        <canvas id="canvas" class="canvas" width="1200" height="630" aria-label="Postcard preview canvas"></canvas>
+
+        <div class="row split" style="margin-top:12px;">
+          <button id="btnCopy" class="btn secondary" type="button">Copy image</button>
+          <div class="row" style="gap:10px;">
+            <button id="btnDownload" class="btn" type="button">Download PNG</button>
+            <button id="btnPrint" class="btn ghost" type="button">Print</button>
+          </div>
+        </div>
+
+        <details class="details">
+          <summary>Saved postcards (local)</summary>
+          <div id="saved" class="saved"></div>
+          <div class="row split" style="margin-top:10px;">
+            <button id="btnExportJson" class="btn ghost" type="button">Export JSON</button>
+            <button id="btnClear" class="btn ghost" type="button">Clear saved</button>
+          </div>
+        </details>
+      </section>
+    </section>
+
+    <footer class="foot">
+      <p>Built for slow thoughts. <a href="https://github.com/owleggsbot/sloth-minute-postcards" target="_blank" rel="noreferrer">Source</a>.</p>
+    </footer>
+  </main>
+
+  <script src="data/packs.js"></script>
+  <script src="app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
+    }
+  </script>
+</body>
+</html>

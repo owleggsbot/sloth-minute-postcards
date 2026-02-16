@@ -1,0 +1,12 @@
+{
+  "name": "Sloth Minute Postcards",
+  "short_name": "Postcards",
+  "description": "Generate premium, printable reflection postcards in 60 seconds. Offline-first.",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#070a0f",
+  "theme_color": "#070a0f",
+  "icons": [
+    {"src": "assets/sloth.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any"}
+  ]
+}
